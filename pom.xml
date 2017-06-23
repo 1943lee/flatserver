@@ -1,0 +1,145 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ezView</groupId>
+  <artifactId>flatserver</artifactId>
+  <packaging>war</packaging>
+  <version>1.0</version>
+  <name>FLAT Web Service</name>
+  <description>FLAT RESTful Web Service</description>
+  
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<java.version>1.7</java.version>
+  </properties>
+  
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.2.5.RELEASE</version>
+    <relativePath/>
+  </parent>
+  
+  <dependencies>
+  	<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-tomcat</artifactId>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+      <!--es-->
+      <dependency>
+          <groupId>org.elasticsearch</groupId>
+          <artifactId>elasticsearch</artifactId>
+          <version>1.7.0</version>
+      </dependency>
+      <!--fastjson-->
+      <dependency>
+          <groupId>com.alibaba</groupId>
+          <artifactId>fastjson</artifactId>
+          <version>1.1.37</version>
+      </dependency>
+      <!-- java redis客户端 -->
+      <dependency>
+          <groupId>redis.clients</groupId>
+          <artifactId>jedis</artifactId>
+          <version>2.8.0</version>
+      </dependency>
+      <dependency>
+          <groupId>com.kedacom.uc.sdk</groupId>
+          <artifactId>uc-sdk</artifactId>
+          <version>2.0</version>
+      </dependency>
+      <dependency>
+          <groupId>com.belerweb</groupId>
+          <artifactId>pinyin4j</artifactId>
+          <version>2.5.0</version>
+      </dependency>
+      <dependency>
+          <groupId>com.esri.geometry</groupId>
+          <artifactId>esri-geometry-api</artifactId>
+          <version>1.2.1</version>
+      </dependency>
+      <dependency>
+          <groupId>com.oracle</groupId>
+          <artifactId>ojdbc14</artifactId>
+          <version>10.2.0.4.0</version>
+      </dependency>
+     <dependency>  
+        <groupId>org.mybatis</groupId>  
+        <artifactId>mybatis</artifactId>  
+        <version>3.4.0</version>
+     </dependency>  
+     <dependency>  
+       <groupId>org.mybatis</groupId>  
+       <artifactId>mybatis-spring</artifactId>  
+       <version>1.3.0</version>
+     </dependency>
+      <!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
+      <dependency>
+          <groupId>com.thoughtworks.xstream</groupId>
+          <artifactId>xstream</artifactId>
+          <version>1.4.9</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+          <version>4.5.2</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-jdbc</artifactId>
+          <version>4.3.5.RELEASE</version>
+      </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+        <plugin>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-maven-plugin</artifactId>
+            <version>1.3.2</version>
+            <configuration>
+                <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
+                <verbose>true</verbose>
+                <overwrite>true</overwrite>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-core</artifactId>
+                    <version>1.3.2</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+      <resources>
+          <resource>
+              <directory>src/main/resources</directory>
+              <excludes>
+                  <exclude>**/.svn/*</exclude>
+                  <exclude>local.*</exclude>
+              </excludes>
+          </resource>
+          <resource>
+              <directory>src/main/java</directory>
+              <excludes>
+                  <exclude>**/.svn/*</exclude>
+              </excludes>
+              <includes>
+                  <include>**/*.xml</include>
+              </includes>
+          </resource>
+      </resources>
+  </build>
+  
+</project>

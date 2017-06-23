@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.DeviceDao">
+    <resultMap id="userResultMap" type="java.util.HashMap">
+        <result property="userName" column="userName" />
+    </resultMap>
+    <resultMap id="deviceResultMap" type="model.Device">
+        <result property="sbbh" column="sbbh"/>
+        <result property="sbmc" column="sbmc"/>
+        <result property="sblx" column="sblx"/>
+        <result property="csmc" column="csmc"/>
+        <result property="sbgsz" column="sbgsz"/>
+        <result property="ssxq" column="ssxq"/>
+    </resultMap>
+    <resultMap id="userAndSbsyzlbResultMap" type="java.util.HashMap">
+        <result property="userName" column="userName" />
+        <result property="sbsyzlb" column="sbsyzlb" />
+    </resultMap>
+    <select id="getUserName" parameterType="String" resultMap="userResultMap">
+        SELECT
+        JYXM as userName
+        FROM B_RS_RY
+        where
+        DLM = #{userCode}
+    </select>
+
+    <select id="getByNotIds" parameterType="String" resultType="java.util.Map">
+        select * from B_YDSB_SBXX where sbbh not in
+        <foreach
+                item="sbbhs"
+                index="index"
+                collection="list"
+                open="("
+                separator=","
+                close=")">
+            #{sbbhs}
+        </foreach>
+    </select>
+
+    <select id="getUnitBySbbh" parameterType="model.Device" resultMap="deviceResultMap">
+        select * from B_YDSB_SBXX t where sbbh = #{sbbh}
+    </select>
+    <select id="getDevice" parameterType="model.Device" resultType="java.util.Map">
+        select * from B_YDSB_SBXX t
+     </select>
+
+    <select id="getUserNameAndSbsyzlb" parameterType="String" resultMap="userAndSbsyzlbResultMap">
+        SELECT
+        JYXM as userName,
+        JYJZ as sbsyzlb
+        FROM B_RS_RY
+        where
+        DLM = #{userCode}
+    </select>
+
+    <insert id="insertDevice" parameterType="java.util.HashMap" flushCache="true">
+        INSERT INTO B_YDSB_SBXX (
+        SBBH,
+        SBMC,
+        SBBM,
+        SBLX,
+        SBXH,
+        SBYHZT,
+        SPSBBH,
+        SBMS,
+        SSXQ,
+        CSMC,
+        IPDZ,
+        SBSYZ,
+        SBGSZ,
+        YDHM,
+        SBJD,
+        SBWD,
+        GXSJ,
+        kTSJ,
+        SD,
+        GD,
+        JD,
+        FX
+        )
+        VALUES (
+        #{sbbh, jdbcType=VARCHAR},
+        #{sbmc, jdbcType=VARCHAR},
+        #{sbbm, jdbcType=VARCHAR},
+        #{sblx, jdbcType=VARCHAR},
+        #{sbxh, jdbcType=VARCHAR},
+        '0',
+        #{spsbbh, jdbcType=VARCHAR},
+        #{sbms, jdbcType=VARCHAR},
+        #{ssxq, jdbcType=VARCHAR},
+        #{csmc, jdbcType=VARCHAR},
+        #{ipdz, jdbcType=VARCHAR},
+        #{sbsyz, jdbcType=VARCHAR},
+        #{sbgsz, jdbcType=VARCHAR},
+        #{ydhm, jdbcType=VARCHAR},
+        #{sbjd, jdbcType=VARCHAR},
+        #{sbwd, jdbcType=VARCHAR},
+        #{gxsj, jdbcType=VARCHAR},
+        #{ktsj, jdbcType=VARCHAR},
+        #{sd, jdbcType=VARCHAR},
+        #{gd, jdbcType=VARCHAR},
+        #{jd, jdbcType=VARCHAR},
+        #{fx, jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertDevices" parameterType="model.Device">
+        INSERT INTO B_YDSB_SBXX (
+        SBBH,
+        SBMC,
+        SBBM,
+        SBLX,
+        SBXH,
+        SBYHZT,
+        SPSBBH,
+        SBMS,
+        SSXQ,
+        CSMC,
+        IPDZ,
+        SBSYZ,
+        SBGSZ,
+        YDHM,
+        SBJD,
+        SBWD,
+        GXSJ,
+        kTSJ,
+        SD,
+        GD,
+        JD,
+        FX
+        )
+        VALUES (
+        #{sbbh, jdbcType=VARCHAR},
+        #{sbmc, jdbcType=VARCHAR},
+        #{sbbm, jdbcType=VARCHAR},
+        #{sblx, jdbcType=VARCHAR},
+        #{sbxh, jdbcType=VARCHAR},
+        '0',
+        #{spsbbh, jdbcType=VARCHAR},
+        #{sbms, jdbcType=VARCHAR},
+        #{ssxq, jdbcType=VARCHAR},
+        #{csmc, jdbcType=VARCHAR},
+        #{ipdz, jdbcType=VARCHAR},
+        #{sbsyz, jdbcType=VARCHAR},
+        #{sbgsz, jdbcType=VARCHAR},
+        #{ydhm, jdbcType=VARCHAR},
+        #{sbjd, jdbcType=VARCHAR},
+        #{sbwd, jdbcType=VARCHAR},
+        #{gxsj, jdbcType=VARCHAR},
+        #{ktsj, jdbcType=VARCHAR},
+        #{sd, jdbcType=VARCHAR},
+        #{gd, jdbcType=VARCHAR},
+        #{jd, jdbcType=VARCHAR},
+        #{fx, jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <update id="updateDevice" parameterType="java.util.HashMap">
+        UPDATE B_YDSB_SBXX
+        SET
+        <if test="sbmc != null">
+            SBMC = #{sbmc,jdbcType=VARCHAR},
+        </if>
+        <if test="sbbm != null">
+            SBBM = #{sbbm,jdbcType=VARCHAR},
+        </if>
+        <if test="sblx != null  and sblx != ''" >
+            SBLX = #{sblx,jdbcType=VARCHAR},
+        </if>
+        <if test="sbxh != null">
+            SBXH = #{sbxh,jdbcType=VARCHAR},
+        </if>
+        <if test="sbyhzt != null and sbyhzt != ''" >
+            SBYHZT = #{sbyhzt,jdbcType=VARCHAR},
+        </if>
+        <if test="sbsmzt != null">
+            SBSMZT = #{sbsmzt,jdbcType=VARCHAR},
+        </if>
+        <if test="spsbbh != null">
+            SPSBBH = #{spsbbh,jdbcType=VARCHAR},
+        </if>
+        <if test="sbms != null">
+            SBMS = #{sbms,jdbcType=VARCHAR},
+        </if>
+        <if test="ssxq != null">
+            SSXQ = #{ssxq,jdbcType=VARCHAR},
+        </if>
+        <if test="csmc != null">
+            CSMC = #{csmc,jdbcType=VARCHAR},
+        </if>
+        <if test="ipdz != null">
+            IPDZ = #{ipdz,jdbcType=VARCHAR},
+        </if>
+        <if test="sbsyz != null">
+            SBSYZ = #{sbsyz,jdbcType=VARCHAR},
+        </if>
+        <if test="sbgsz != null">
+            SBGSZ = #{sbgsz,jdbcType=VARCHAR},
+        </if>
+        <if test="ydhm != null">
+            YDHM = #{ydhm,jdbcType=VARCHAR},
+        </if>
+        <if test="rjbb != null">
+            RJBB = #{rjbb,jdbcType=VARCHAR},
+        </if>
+        <if test="sbjd != null">
+            SBJD = #{sbjd,jdbcType=VARCHAR},
+        </if>
+        <if test="sbwd != null">
+            SBWD = #{sbwd,jdbcType=VARCHAR},
+        </if>
+        <if test="ktsj != null">
+            KTSJ = #{ktsj,jdbcType=VARCHAR},
+        </if>
+        <if test="sd != null">
+            SD = #{sd,jdbcType=VARCHAR},
+        </if>
+        <if test="gd != null">
+            GD = #{gd,jdbcType=VARCHAR},
+        </if>
+        <if test="jd != null">
+            JD = #{jd,jdbcType=VARCHAR},
+        </if>
+        <if test="fx != null">
+            FX = #{fx,jdbcType=VARCHAR},
+        </if>
+        <if test="py != null">
+            PY = #{py,jdbcType=VARCHAR},
+        </if>
+        <if test="gxsj != null">
+            GXSJ = #{gxsj,jdbcType=VARCHAR},
+        </if>
+        <if test="ylzd1 != null">
+            YLZD1 = #{ylzd1,jdbcType=VARCHAR},
+        </if>
+        <if test="ylzd2 != null">
+            YLZD2 = #{ylzd2,jdbcType=VARCHAR},
+        </if>
+        <if test="ylzd3 != null">
+            YLZD3 = #{ylzd3,jdbcType=VARCHAR},
+        </if>
+        SBBH = #{sbbh,jdbcType=VARCHAR}
+        WHERE
+        SBBH = #{sbbh}
+    </update>
+
+    <update id="deleteDevice" parameterType="String">
+        DELETE FROM B_YDSB_SBXX
+        WHERE
+        SBBH = #{sbbh, jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteDevices" parameterType="java.util.HashMap">
+        DELETE
+        FROM B_YDSB_SBXX
+        WHERE
+        SBBH = #{sbbh, jdbcType=VARCHAR}
+    </delete>
+
+    <update id="clearUserStatus">
+        UPDATE B_YDSB_SBXX
+        SET SBYHZT ='0',
+            SBSYZ = SBGSZ
+    </update>
+
+    <update id="updateUserStatus" parameterType="java.util.HashMap">
+        UPDATE B_YDSB_SBXX
+        SET SBSYZ = #{sbsyz,jdbcType=VARCHAR},
+            SBYHZT = #{sbyhzt,jdbcType=VARCHAR}
+        WHERE
+        SBBH = #{sbbh}
+    </update>
+
+    <update id="updateDevicePostion" parameterType="java.util.HashMap">
+        UPDATE B_YDSB_SBXX
+        SET SBJD = #{sbjd,jdbcType=VARCHAR},
+            SBWD = #{sbwd,jdbcType=VARCHAR},
+            GXSJ = #{gxsj,jdbcType=VARCHAR}
+        WHERE
+        SBBH = #{sbbh}
+    </update>
+</mapper>

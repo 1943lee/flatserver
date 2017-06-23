@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keda.patrol.dao.PatrolAlarmInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.keda.patrol.model.PatrolAlarmInfo" >
+    <result column="BJBH" property="bjbh" jdbcType="VARCHAR" />
+    <result column="BJNR" property="bjnr" jdbcType="VARCHAR" />
+    <result column="BJSJ" property="bjsj" jdbcType="VARCHAR" />
+    <result column="GJR" property="gjr" jdbcType="VARCHAR" />
+    <result column="GJRDW" property="gjrdw" jdbcType="VARCHAR" />
+    <result column="YLZD1" property="ylzd1" jdbcType="VARCHAR" />
+    <result column="YLZD2" property="ylzd2" jdbcType="VARCHAR" />
+    <result column="YLZD3" property="ylzd3" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.keda.patrol.model.PatrolAlarmInfo" >
+    insert into B_JW_BJXX (BJBH, BJNR, BJSJ, 
+      GJR, GJRDW, YLZD1, 
+      YLZD2, YLZD3)
+    values (#{bjbh,jdbcType=VARCHAR}, #{bjnr,jdbcType=VARCHAR}, #{bjsj,jdbcType=VARCHAR}, 
+      #{gjr,jdbcType=VARCHAR}, #{gjrdw,jdbcType=VARCHAR}, #{ylzd1,jdbcType=VARCHAR}, 
+      #{ylzd2,jdbcType=VARCHAR}, #{ylzd3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.keda.patrol.model.PatrolAlarmInfo" >
+    insert into B_JW_BJXX
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bjbh != null" >
+        BJBH,
+      </if>
+      <if test="bjnr != null" >
+        BJNR,
+      </if>
+      <if test="bjsj != null" >
+        BJSJ,
+      </if>
+      <if test="gjr != null" >
+        GJR,
+      </if>
+      <if test="gjrdw != null" >
+        GJRDW,
+      </if>
+      <if test="ylzd1 != null" >
+        YLZD1,
+      </if>
+      <if test="ylzd2 != null" >
+        YLZD2,
+      </if>
+      <if test="ylzd3 != null" >
+        YLZD3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bjbh != null" >
+        #{bjbh,jdbcType=VARCHAR},
+      </if>
+      <if test="bjnr != null" >
+        #{bjnr,jdbcType=VARCHAR},
+      </if>
+      <if test="bjsj != null" >
+        #{bjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="gjr != null" >
+        #{gjr,jdbcType=VARCHAR},
+      </if>
+      <if test="gjrdw != null" >
+        #{gjrdw,jdbcType=VARCHAR},
+      </if>
+      <if test="ylzd1 != null" >
+        #{ylzd1,jdbcType=VARCHAR},
+      </if>
+      <if test="ylzd2 != null" >
+        #{ylzd2,jdbcType=VARCHAR},
+      </if>
+      <if test="ylzd3 != null" >
+        #{ylzd3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

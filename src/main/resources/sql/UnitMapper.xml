@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UnitDao">
+    <resultMap id="unitResultMap" type="model.Unit">
+        <result property="dwbh" column="dwbh" />
+        <result property="dwmc" column="dwmc" />
+        <result property="lxr" column="lxr" />
+        <result property="dwjb" column="dwjb" />
+        <result property="dwnbbm" column="dwnbbm" />
+    </resultMap>
+    <select id="getUnit" parameterType="model.Unit" resultType="java.util.Map">
+        select * from B_RS_DW t order by dwnbbm
+    </select>
+
+
+    <select id="getByNotIds" parameterType="String" resultType="java.util.Map">
+        select * from B_RS_DW where dwbh not in
+        <foreach
+            item="dwbhs"
+            index="index"
+            collection="list"
+            open="("
+            separator=","
+            close=")">
+        #{dwbhs}
+        </foreach>
+    </select>
+
+    <select id="getUnitByDwbh" parameterType="model.Unit" resultMap="unitResultMap">
+        select * from B_RS_DW t where dwbh = #{dwbh}
+    </select>
+
+    <select id="getDwmcByDwbh" parameterType="String" resultType="java.util.Map">
+        select dwmc from B_RS_DW t where dwbh = #{dwbh}
+    </select>
+
+    <insert id="insertUnit" parameterType="model.Unit">
+        INSERT INTO B_RS_DW (xh,dwbh,dwmc,dwdz,lxdh,lxr,dwjb,dwnbbm,dwms,ylzd1,ylzd2,ylzd3,dwsx,dwpy,sfxq,dwjc,ssxq,lsgx)
+        select seq_qj_xh.nextval as xh,
+        #{dwbh,jdbcType=VARCHAR},
+            #{dwmc,jdbcType=VARCHAR},
+            #{dwdz,jdbcType=VARCHAR},
+            #{lxdh,jdbcType=VARCHAR},
+            #{lxr,jdbcType=VARCHAR},
+            #{dwjb,jdbcType=VARCHAR},
+            #{dwnbbm,jdbcType=VARCHAR},
+            #{dwms,jdbcType=VARCHAR},
+            #{ylzd1,jdbcType=VARCHAR},
+            #{ylzd2,jdbcType=VARCHAR},
+            #{ylzd3,jdbcType=VARCHAR},
+            #{dwsx,jdbcType=VARCHAR},
+            #{dwpy,jdbcType=VARCHAR},
+            #{sfxq,jdbcType=VARCHAR},
+            #{dwjc,jdbcType=VARCHAR},
+            #{ssxq,jdbcType=VARCHAR},
+            #{lsgx,jdbcType=VARCHAR}
+        from dual
+    </insert>
+
+    <update id="updateUnit" parameterType="model.Unit">
+        UPDATE B_RS_DW
+        SET
+        <if test="dwmc != null">
+            DWMC = #{dwmc,jdbcType=VARCHAR},
+        </if>
+        <if test="dwdz != null">
+            DWDZ = #{dwdz,jdbcType=VARCHAR},
+        </if>
+        <if test="lxdh != null">
+            LXDH = #{lxdh,jdbcType=VARCHAR},
+        </if>
+        <if test="dwjb != null">
+            DWJB = #{dwjb,jdbcType=VARCHAR},
+        </if>
+        <if test="dwnbbm != null">
+            DWNBBM = #{dwnbbm,jdbcType=VARCHAR},
+        </if>
+        <if test="dwms != null">
+            DWMS = #{dwms,jdbcType=VARCHAR},
+        </if>
+        <if test="ylzd1 != null">
+            YLZD1 = #{ylzd1,jdbcType=VARCHAR},
+        </if>
+        <if test="ylzd2 != null">
+            YLZD2 = #{ylzd2,jdbcType=VARCHAR},
+        </if>
+        <if test="ylzd3 != null">
+            YLZD3 = #{ylzd3,jdbcType=VARCHAR},
+        </if>
+        <if test="dwsx != null">
+            DWSX = #{dwsx,jdbcType=VARCHAR},
+        </if>
+        <if test="dwpy != null">
+            DWPY = #{dwpy,jdbcType=VARCHAR},
+        </if>
+        <if test="sfxq != null">
+            SFXQ = #{sfxq,jdbcType=VARCHAR},
+        </if>
+        <if test="dwjc != null">
+            DWJC = #{dwjc,jdbcType=VARCHAR},
+        </if>
+        <if test="ssxq != null">
+            SSXQ = #{ssxq,jdbcType=VARCHAR},
+        </if>
+        <if test="lsgx != null">
+            LSGX = #{lsgx,jdbcType=VARCHAR},
+        </if>
+
+        DWBH = #{dwbh,jdbcType=VARCHAR}
+        WHERE
+        DWBH = #{dwbh}
+    </update>
+
+    <delete id="deleteUnit" parameterType="model.Unit">
+        DELETE
+        FROM B_RS_DW
+        WHERE DWBH =#{dwbh}
+    </delete>
+</mapper>

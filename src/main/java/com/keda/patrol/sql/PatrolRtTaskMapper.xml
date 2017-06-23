@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keda.patrol.dao.PatrolRtTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.keda.patrol.model.PatrolRtTask" >
+    <id column="RWBH" property="rwbh" jdbcType="VARCHAR" />
+    <result column="RWMC" property="rwmc" jdbcType="VARCHAR" />
+    <result column="CJR" property="cjr" jdbcType="VARCHAR" />
+    <result column="CJSJ" property="cjsj" jdbcType="VARCHAR" />
+    <result column="XLBH" property="xlbh" jdbcType="VARCHAR" />
+    <result column="SBBH" property="sbbh" jdbcType="VARCHAR" />
+    <result column="XLR" property="xlr" jdbcType="VARCHAR" />
+    <result column="KSSJ" property="kssj" jdbcType="VARCHAR" />
+    <result column="JSSJ" property="jssj" jdbcType="VARCHAR" />
+    <result column="SJKSSJ" property="sjkssj" jdbcType="VARCHAR" />
+    <result column="SJJSSJ" property="sjjssj" jdbcType="VARCHAR" />
+    <result column="YLZD1" property="ylzd1" jdbcType="VARCHAR" />
+    <result column="YLZD2" property="ylzd2" jdbcType="VARCHAR" />
+    <result column="YLZD3" property="ylzd3" jdbcType="VARCHAR" />
+    <result column="PY" property="py" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RWBH, RWMC, CJR, CJSJ, XLBH, SBBH, XLR, KSSJ, JSSJ, SJKSSJ, SJJSSJ, YLZD1, YLZD2, 
+    YLZD3, PY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from B_JW_XLSSRW
+    where RWBH = #{rwbh,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from B_JW_XLSSRW
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from B_JW_XLSSRW
+    where RWBH = #{rwbh,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.keda.patrol.model.PatrolRtTask" >
+    insert into B_JW_XLSSRW (RWBH, RWMC, CJR, 
+      CJSJ, XLBH, SBBH, XLR, 
+      KSSJ, JSSJ, SJKSSJ, 
+      SJJSSJ, YLZD1, YLZD2, 
+      YLZD3, PY)
+    values (#{rwbh,jdbcType=VARCHAR}, #{rwmc,jdbcType=VARCHAR}, #{cjr,jdbcType=VARCHAR}, 
+      #{cjsj,jdbcType=VARCHAR}, #{xlbh,jdbcType=VARCHAR}, #{sbbh,jdbcType=VARCHAR}, #{xlr,jdbcType=VARCHAR}, 
+      #{kssj,jdbcType=VARCHAR}, #{jssj,jdbcType=VARCHAR}, #{sjkssj,jdbcType=VARCHAR}, 
+      #{sjjssj,jdbcType=VARCHAR}, #{ylzd1,jdbcType=VARCHAR}, #{ylzd2,jdbcType=VARCHAR}, 
+      #{ylzd3,jdbcType=VARCHAR}, #{py,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.keda.patrol.model.PatrolRtTask" >
+    insert into B_JW_XLSSRW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rwbh != null" >
+        RWBH,
+      </if>
+      <if test="rwmc != null" >
+        RWMC,
+      </if>
+      <if test="cjr != null" >
+        CJR,
+      </if>
+      <if test="cjsj != null" >
+        CJSJ,
+      </if>
+      <if test="xlbh != null" >
+        XLBH,
+      </if>
+      <if test="sbbh != null" >
+        SBBH,
+      </if>
+      <if test="xlr != null" >
+        XLR,
+      </if>
+      <if test="kssj != null" >
+        KSSJ,
+      </if>
+      <if test="jssj != null" >
+        JSSJ,
+      </if>
+      <if test="sjkssj != null" >
+        SJKSSJ,
+      </if>
+      <if test="sjjssj != null" >
+        SJJSSJ,
+      </if>
+      <if test="ylzd1 != null" >
+        YLZD1,
+      </if>
+      <if test="ylzd2 != null" >
+        YLZD2,
+      </if>
+      <if test="ylzd3 != null" >
+        YLZD3,
+      </if>
+      <if test="py != null" >
+        PY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rwbh != null" >
+        #{rwbh,jdbcType=VARCHAR},
+      </if>
+      <if test="rwmc != null" >
+        #{rwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="cjr != null" >
+        #{cjr,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="xlbh != null" >
+        #{xlbh,jdbcType=VARCHAR},
+      </if>
+      <if test="sbbh != null" >
+        #{sbbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xlr != null" >
+        #{xlr,jdbcType=VARCHAR},
+      </if>
+      <if test="kssj != null" >
+        #{kssj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssj != null" >
+        #{jssj,jdbcType=VARCHAR},
+      </if>
+      <if test="sjkssj != null" >
+        #{sjkssj,jdbcType=VARCHAR},
+      </if>
+      <if test="sjjssj != null" >
+        #{sjjssj,jdbcType=VARCHAR},
+      </if>
+      <if test="ylzd1 != null" >
+        #{ylzd1,jdbcType=VARCHAR},
+      </if>
+      <if test="ylzd2 != null" >
+        #{ylzd2,jdbcType=VARCHAR},
+      </if>
+      <if test="ylzd3 != null" >
+        #{ylzd3,jdbcType=VARCHAR},
+      </if>
+      <if test="py != null" >
+        #{py,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.keda.patrol.model.PatrolRtTask" >
+    update B_JW_XLSSRW
+    <set >
+      <if test="rwmc != null" >
+        RWMC = #{rwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="cjr != null" >
+        CJR = #{cjr,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null" >
+        CJSJ = #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="xlbh != null" >
+        XLBH = #{xlbh,jdbcType=VARCHAR},
+      </if>
+      <if test="sbbh != null" >
+        SBBH = #{sbbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xlr != null" >
+        XLR = #{xlr,jdbcType=VARCHAR},
+      </if>
+      <if test="kssj != null" >
+        KSSJ = #{kssj,jdbcType=VARCHAR},
+      </if>
+      <if test="jssj != null" >
+        JSSJ = #{jssj,jdbcType=VARCHAR},
+      </if>
+      <if test="sjkssj != null" >
+        SJKSSJ = #{sjkssj,jdbcType=VARCHAR},
+      </if>
+      <if test="sjjssj != null" >
+        SJJSSJ = #{sjjssj,jdbcType=VARCHAR},
+      </if>
+      <if test="ylzd1 != null" >
+        YLZD1 = #{ylzd1,jdbcType=VARCHAR},
+      </if>
+      <if test="ylzd2 != null" >
+        YLZD2 = #{ylzd2,jdbcType=VARCHAR},
+      </if>
+      <if test="ylzd3 != null" >
+        YLZD3 = #{ylzd3,jdbcType=VARCHAR},
+      </if>
+      <if test="py != null" >
+        PY = #{py,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RWBH = #{rwbh,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.keda.patrol.model.PatrolRtTask" >
+    update B_JW_XLSSRW
+    set RWMC = #{rwmc,jdbcType=VARCHAR},
+      CJR = #{cjr,jdbcType=VARCHAR},
+      CJSJ = #{cjsj,jdbcType=VARCHAR},
+      XLBH = #{xlbh,jdbcType=VARCHAR},
+      SBBH = #{sbbh,jdbcType=VARCHAR},
+      XLR = #{xlr,jdbcType=VARCHAR},
+      KSSJ = #{kssj,jdbcType=VARCHAR},
+      JSSJ = #{jssj,jdbcType=VARCHAR},
+      SJKSSJ = #{sjkssj,jdbcType=VARCHAR},
+      SJJSSJ = #{sjjssj,jdbcType=VARCHAR},
+      YLZD1 = #{ylzd1,jdbcType=VARCHAR},
+      YLZD2 = #{ylzd2,jdbcType=VARCHAR},
+      YLZD3 = #{ylzd3,jdbcType=VARCHAR},
+      PY = #{py,jdbcType=VARCHAR}
+    where RWBH = #{rwbh,jdbcType=VARCHAR}
+  </update>
+</mapper>

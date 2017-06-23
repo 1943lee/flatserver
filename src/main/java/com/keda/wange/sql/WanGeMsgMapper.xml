@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.keda.wange.dao.WanGeMsgMapper" >
+  <resultMap id="BaseResultMap" type="com.keda.wange.model.WanGeMsg" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CALL_ID" property="callId" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="SENDER" property="sender" jdbcType="DECIMAL" />
+    <result column="SEAT" property="seat" jdbcType="CHAR" />
+    <result column="SEAT_IP" property="seatIp" jdbcType="VARCHAR" />
+    <result column="P_ID" property="pId" jdbcType="DECIMAL" />
+    <result column="TIME" property="time" jdbcType="DATE" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CALL_ID, STATUS, SENDER, SEAT, SEAT_IP, P_ID, TIME, CONTENT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.keda.wange.model.WanGeMsgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from T_MSG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_MSG
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from T_MSG
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.keda.wange.model.WanGeMsgExample" >
+    delete from T_MSG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.keda.wange.model.WanGeMsg" >
+    insert into T_MSG (ID, CALL_ID, STATUS, 
+      SENDER, SEAT, SEAT_IP, 
+      P_ID, TIME, CONTENT)
+    values (#{id,jdbcType=DECIMAL}, #{callId,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, 
+      #{sender,jdbcType=DECIMAL}, #{seat,jdbcType=CHAR}, #{seatIp,jdbcType=VARCHAR}, 
+      #{pId,jdbcType=DECIMAL}, #{time,jdbcType=DATE}, #{content,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.keda.wange.model.WanGeMsg" >
+    insert into T_MSG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="callId != null" >
+        CALL_ID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="sender != null" >
+        SENDER,
+      </if>
+      <if test="seat != null" >
+        SEAT,
+      </if>
+      <if test="seatIp != null" >
+        SEAT_IP,
+      </if>
+      <if test="pId != null" >
+        P_ID,
+      </if>
+      <if test="time != null" >
+        TIME,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="callId != null" >
+        #{callId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="sender != null" >
+        #{sender,jdbcType=DECIMAL},
+      </if>
+      <if test="seat != null" >
+        #{seat,jdbcType=CHAR},
+      </if>
+      <if test="seatIp != null" >
+        #{seatIp,jdbcType=VARCHAR},
+      </if>
+      <if test="pId != null" >
+        #{pId,jdbcType=DECIMAL},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=DATE},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.keda.wange.model.WanGeMsgExample" resultType="java.lang.Integer" >
+    select count(*) from T_MSG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.keda.wange.model.WanGeMsg" >
+    update T_MSG
+    <set >
+      <if test="callId != null" >
+        CALL_ID = #{callId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="sender != null" >
+        SENDER = #{sender,jdbcType=DECIMAL},
+      </if>
+      <if test="seat != null" >
+        SEAT = #{seat,jdbcType=CHAR},
+      </if>
+      <if test="seatIp != null" >
+        SEAT_IP = #{seatIp,jdbcType=VARCHAR},
+      </if>
+      <if test="pId != null" >
+        P_ID = #{pId,jdbcType=DECIMAL},
+      </if>
+      <if test="time != null" >
+        TIME = #{time,jdbcType=DATE},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.keda.wange.model.WanGeMsg" >
+    update T_MSG
+    set CALL_ID = #{callId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      SENDER = #{sender,jdbcType=DECIMAL},
+      SEAT = #{seat,jdbcType=CHAR},
+      SEAT_IP = #{seatIp,jdbcType=VARCHAR},
+      P_ID = #{pId,jdbcType=DECIMAL},
+      TIME = #{time,jdbcType=DATE},
+      CONTENT = #{content,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>
